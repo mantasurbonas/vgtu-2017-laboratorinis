@@ -18,12 +18,14 @@ public class SwingGameRenderer {
 	private static final int X_OFFSET  = 50;
 	private static final int Y_OFFSET  = 50;
 	private BufferedImage wallImg;
+	private BufferedImage appleImg;
 	
 	public SwingGameRenderer(GameMap map, Snake snake) throws IOException {
 		this.map = map;
 		this.snake = snake;
 		
-		wallImg = ImageIO.read(new File("E:/prj/vgtu/2017/wall.png"));
+		wallImg = ImageIO.read(new File("wall.png"));
+		appleImg = ImageIO.read(new File("apple.png"));
 	}
 
 	public void render(Graphics g){
@@ -46,7 +48,9 @@ public class SwingGameRenderer {
 	}
 
 	private void drawApple(Graphics g, int y, int x) {
-		g.fillOval(X_OFFSET+x*10, Y_OFFSET+y*10, 3, 3);
+
+		//g.fillOval(X_OFFSET+x*10, Y_OFFSET+y*10, 3, 3);
+		g.drawImage(appleImg, X_OFFSET+x*10, Y_OFFSET+y*10, 10, 10, null);
 	}
 
 	private void drawWallElement(Graphics g, int y, int x) {
