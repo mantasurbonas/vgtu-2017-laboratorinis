@@ -49,7 +49,7 @@ public class WindowsGame extends JFrame{
 		
 		swingRenderer = new SwingGameRenderer(map, snake);
 		
-		Timer timer = new Timer(500, new ActionListener() {
+		Timer timer = new Timer(300, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				onTimer();

@@ -1,5 +1,7 @@
 package zaltys;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class GameRules {
 
 	private GameMap map;
@@ -8,6 +10,7 @@ public class GameRules {
 	public GameRules(Snake snake, GameMap map){
 		this.map = map;
 		this.snake = snake;
+		generateApple();
 	}
 	
 	public Coord createNewHead(Coord oldHead, Direction snakeDirection) {
@@ -28,11 +31,28 @@ public class GameRules {
 	}
 
 	public void decideDirection(int n) {
+
 		switch(n){
-			case 'a': snake.setDirection(Direction.LEFT); break;
-			case 'd': snake.setDirection(Direction.RIGHT); break;
-			case 's': snake.setDirection(Direction.DOWN); break;
-			case 'w': snake.setDirection(Direction.UP); break;
+			case 'a':
+				if(snake.getDirection() == Direction.RIGHT)
+					break;
+				snake.setDirection(Direction.LEFT);
+				break;
+			case 'd':
+				if(snake.getDirection() == Direction.LEFT)
+					break;
+				snake.setDirection(Direction.RIGHT);
+				break;
+			case 's':
+				if(snake.getDirection() == Direction.UP)
+					break;
+				snake.setDirection(Direction.DOWN);
+				break;
+			case 'w':
+				if(snake.getDirection() == Direction.DOWN)
+					break;
+				snake.setDirection(Direction.UP);
+				break;
 		}
 	}
 
@@ -48,9 +68,27 @@ public class GameRules {
 		
 		snake.addHead(newHead);
 		
-		if (map.isApple(newHead.x, newHead.y))
+		if (map.isApple(newHead.x, newHead.y)) {
 			map.eatApple(newHead.x, newHead.y); // don't trim
+			generateApple();
+		}
 		else
 			snake.trimTail();	
+	}
+
+
+	public void generateApple() {
+		boolean applePlaced = false;
+
+		while(!applePlaced) {
+			int appleSpot = ThreadLocalRandom.current().nextInt(0, map.getHeight() * map.getWidth() + 1);
+			int x = appleSpot % map.getWidth();
+			int y = appleSpot / map.getHeight();
+
+			if(map.isEmpty(x, y) && !snake.isMe(x, y)) {
+				map.placeApple(x, y);
+				applePlaced = true;
+			}
+		}
 	}
 }
