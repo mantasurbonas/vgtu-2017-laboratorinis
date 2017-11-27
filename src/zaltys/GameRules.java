@@ -33,6 +33,7 @@ public class GameRules {
 			case 'd': snake.setDirection(Direction.RIGHT); break;
 			case 's': snake.setDirection(Direction.DOWN); break;
 			case 'w': snake.setDirection(Direction.UP); break;
+			case 'x': System.exit(0); break;
 		}
 	}
 

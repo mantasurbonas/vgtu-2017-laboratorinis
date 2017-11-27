@@ -23,7 +23,7 @@ public class SwingGameRenderer {
 		this.map = map;
 		this.snake = snake;
 		
-		wallImg = ImageIO.read(new File("E:/prj/vgtu/2017/wall.png"));
+		wallImg = ImageIO.read(new File("C:\\Work\\prj\\vgtu-2017\\wall.png"));
 	}
 
 	public void render(Graphics g){

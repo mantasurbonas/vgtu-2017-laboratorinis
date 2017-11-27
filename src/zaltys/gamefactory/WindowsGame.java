@@ -1,4 +1,6 @@
-package zaltys;
+package zaltys.gamefactory;
+
+import zaltys.*;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-public class WindowsGame extends JFrame{
+public class WindowsGame extends JFrame implements Game {
 	private static final long serialVersionUID = 1L;
 
 	private GameMap map = new GameMap();
@@ -75,8 +77,9 @@ public class WindowsGame extends JFrame{
 		
 		repaint();
 	}
-	
-	public static void main(String args[]) throws Exception{
+
+	@Override
+	public void run() throws Exception {
 		SwingUtilities.invokeAndWait(new Runnable(){
 			public void run(){
 				try {
